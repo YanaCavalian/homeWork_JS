@@ -43,53 +43,37 @@ const calculator = {
 // Solution 2 with bind Solution 3 with call or apply
 
 //1 without bind, call or apply
-const obj1 = {
-    from: 1,
-    to: 10,
-    createArr: function () {
-      this.arr = [];
-      for (let i = this.from; i <= this.to; i++) {
-        this.arr.push(i);
-      }
-      this.arr.sort((a, b) => a - b);
-    },
-  };
-  
-  obj1.createArr();
-  console.log(obj1.arr); 
+const obj = {
+  from: 1,
+  to: 10,
+};
 
-  //Solution 2 with bind
-  const obj2 = {
-    from: 1,
-    to: 10,
-    createArr: function () {
-      this.arr = [];
-      for (let i = this.from; i <= this.to; i++) {
-        this.arr.push(i);
-      }
-      this.arr.sort((a, b) => a - b);
-    },
-  };
-  
-  const createArrBound = obj2.createArr.bind(obj2);
-  createArrBound();
-  console.log(obj2.arr); 
-  
-  //Solution 3 with call or apply
-  const obj3 = {
-    from: 1,
-    to: 10,
-    createArr: function () {
-      this.arr = [];
-      for (let i = this.from; i <= this.to; i++) {
-        this.arr.push(i);
-      }
-      this.arr.sort((a, b) => a - b);
-    },
-  };
-  
-  obj3.createArr.call(obj3);
-  console.log(obj3.arr);
+obj.createArr = function () {
+  if (this.from <= this.to) {
+    this.arr = Array.from({ length: this.to - this.from + 1 }, (_, i) => this.from + i);
+    this.arr.sort((a, b) => a - b);
+  } else {
+    console.error("error");
+  }
+};
+
+
+const createArrBind = obj.createArr.bind(obj);
+createArrBind(); 
+console.log(obj.arr);
+
+
+const createArrCall = obj.createArr.call(obj);
+console.log(obj.arr);
+
+
+const createArrApply = obj.createArr.apply(obj);
+console.log(obj.arr);
+
+
+obj.createArr();
+console.log(obj.arr);
+
 
 
   
