@@ -90,4 +90,7 @@ const obj1 = {
   
   obj3.createArr.call(obj3);
   console.log(obj3.arr);
+
+
+  
   
