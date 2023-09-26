@@ -3,38 +3,39 @@
 // Group can contain only 12 students
 
 const University = {
-    init(universityName, dean) {
-      this.universityName = universityName;
-      this.dean = dean;
-      return this;
-    },
-  };
-  
-  const Faculty = Object.create(University);
-  
-  Faculty.initFaculty = function (universityName, dean, facultyName) {
-    University.init.call(this, universityName, dean);
-    this.facultyName = facultyName;
-    this.groups = [];
+  init(universityName, dean) {
+    this.universityName = universityName;
+    this.dean = dean;
     return this;
-  };
-  
-  Faculty.enlistStudent = function (studentName) {
-    if (this.groups.length === 0 || this.groups[this.groups.length - 1].length >= 12) {
-      this.groups.push([studentName]);
-    } else {
-      this.groups[this.groups.length - 1].push(studentName);
-    }
-  };
-  
-  const myUniversity = Object.create(University).init("Polytechnic", "Dean Name");
-  const myFaculty = Object.create(Faculty).initFaculty("Polytechnic", "Dean Name", "Engineering");
-  
-  console.log(myFaculty.universityName);
-  myFaculty.enlistStudent("Taras");
-  console.log(myFaculty.groups);
-  
-  
+  },
+};
+
+const Faculty = Object.create(University);
+
+Faculty.initFaculty = function (universityName, dean, facultyName) {
+  const faculty = Object.create(this);
+  faculty.universityName = universityName;
+  faculty.dean = dean;
+  faculty.facultyName = facultyName;
+  faculty.groups = [];
+  return faculty;
+};
+
+Faculty.enlistStudent = function (studentName) {
+  if (this.groups.length === 0 || this.groups[this.groups.length - 1].length >= 12) {
+    this.groups.push([studentName]);
+  } else {
+    this.groups[this.groups.length - 1].push(studentName);
+  }
+};
+
+const myUniversity = Object.create(University).init("Polytechnic", "Dean Name");
+const myFaculty = Faculty.initFaculty("Polytechnic", "Dean Name", "Engineering");
+
+console.log(myFaculty.universityName);
+myFaculty.enlistStudent("Taras");
+console.log(myFaculty.groups);
+    
 //   //Create a basic Animal that has name property and a getInfo() method.
 // getInfo method should return info about animal
 // Create sub objects, Mammal and Bird, that inherit the properties and methods of the Animal. They should receive info about where they live
