@@ -2,20 +2,24 @@
 // Create faculty obj with facultyName and groups arr properties and method enlistStudent into groups
 // Group can contain only 12 students
 
-function University(universityName, dean) {
-    this.universityName = universityName;
-    this.dean = dean;
-  }
+const University = {
+    init(universityName, dean) {
+      this.universityName = universityName;
+      this.dean = dean;
+      return this;
+    },
+  };
   
-  function Faculty(universityName, dean, facultyName) {
-    University.call(this, universityName, dean);
+  const Faculty = Object.create(University);
+  
+  Faculty.initFaculty = function (universityName, dean, facultyName) {
+    University.init.call(this, universityName, dean);
     this.facultyName = facultyName;
     this.groups = [];
-  }
+    return this;
+  };
   
-  Faculty.prototype = Object.create(University.prototype);
-  Faculty.prototype.constructor = Faculty;
-  Faculty.prototype.enlistStudent = function (studentName) {
+  Faculty.enlistStudent = function (studentName) {
     if (this.groups.length === 0 || this.groups[this.groups.length - 1].length >= 12) {
       this.groups.push([studentName]);
     } else {
@@ -23,12 +27,13 @@ function University(universityName, dean) {
     }
   };
   
-  const myUniversity = new University("Polytechnic", "Dean Name");
-  const myFaculty = new Faculty("Polytechnic", "Dean Name", "Engineering");
+  const myUniversity = Object.create(University).init("Polytechnic", "Dean Name");
+  const myFaculty = Object.create(Faculty).initFaculty("Polytechnic", "Dean Name", "Engineering");
   
   console.log(myFaculty.universityName);
   myFaculty.enlistStudent("Taras");
   console.log(myFaculty.groups);
+  
   
 //   //Create a basic Animal that has name property and a getInfo() method.
 // getInfo method should return info about animal
