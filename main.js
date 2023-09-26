@@ -2,39 +2,40 @@
 // Create faculty obj with facultyName and groups arr properties and method enlistStudent into groups
 // Group can contain only 12 students
 
-const University = {
-  init(universityName, dean) {
-    this.universityName = universityName;
-    this.dean = dean;
-    return this;
+const university = {
+  universityName: "Polytechnic",
+  dean: "Taras",
+};
+
+const faculty = Object.create(university, {
+  facultyName: {
+    value: "Engineering",
+    enumerable: true,
   },
-};
+  groups: {
+    value: [],
+    enumerable: true,
+  },
+  enlistStudent: {
+    value: function (studentName) {
+      const lastGroup = this.groups[this.groups.length - 1] || [];
+      if (lastGroup.length !== 12) {
+        lastGroup.push(studentName);
+        if (!this.groups.length) {
+          this.groups.push(lastGroup);
+        }
+      } else {
+        this.groups.push([studentName]);
+      }
+    },
+  },
+});
 
-const Faculty = Object.create(University);
+console.log(faculty.universityName);
+console.log(faculty.dean); 
+faculty.enlistStudent("Taras");
+console.log(faculty.groups);
 
-Faculty.initFaculty = function (universityName, dean, facultyName) {
-  const faculty = Object.create(this);
-  faculty.universityName = universityName;
-  faculty.dean = dean;
-  faculty.facultyName = facultyName;
-  faculty.groups = [];
-  return faculty;
-};
-
-Faculty.enlistStudent = function (studentName) {
-  if (this.groups.length === 0 || this.groups[this.groups.length - 1].length >= 12) {
-    this.groups.push([studentName]);
-  } else {
-    this.groups[this.groups.length - 1].push(studentName);
-  }
-};
-
-const myUniversity = Object.create(University).init("Polytechnic", "Dean Name");
-const myFaculty = Faculty.initFaculty("Polytechnic", "Dean Name", "Engineering");
-
-console.log(myFaculty.universityName);
-myFaculty.enlistStudent("Taras");
-console.log(myFaculty.groups);
     
 //   //Create a basic Animal that has name property and a getInfo() method.
 // getInfo method should return info about animal
