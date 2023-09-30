@@ -102,7 +102,7 @@ console.log(dog.getInfo());
 console.log(dog.run()); 
 console.log(dog.whoIsGoodDog()); 
 
-const penguin = new Penguin('Penny', 'Antarctica', 'King Penguin');
+const penguin = new Penguin('Peny', 'Antarctica', 'King Penguin');
 console.log(penguin.getInfo());
 console.log(penguin.fly()); 
 console.log(penguin.swim());
