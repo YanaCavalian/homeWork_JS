@@ -54,11 +54,11 @@ const randomResolve = () => {
   
     try {
       const results = await Promise.all(promises);
-      console.log('🥳 Ура');
+      console.log('🥳 Yasss');
       console.log(results);
       return results;
     } catch (errors) {
-      console.log('🫠🫡 Ошибка');
+      console.log('🫠🫡 ok');
       console.error(errors);
       throw errors;
     }
@@ -67,10 +67,10 @@ const randomResolve = () => {
   const printResponse = async (n) => {
     try {
       const results = await createPromiseArr(n);
-      console.log('🥳 Ура');
+      console.log('🥳 Yasss');
       console.log(results);
     } catch (error) {
-      console.log('🫠🫡 Ошибка');
+      console.log('🫠🫡 error');
       console.error(error);
     }
   };
