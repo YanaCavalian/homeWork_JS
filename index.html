@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home_work_JS</title>
-    <script src="./main.js"></script>
+    <style>
+            .dot {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgb(32, 200, 225);
+            border-radius: 50%;      
+        }
+    </style>
+    <!-- <script src="./main.js"></script> -->
 </head>
 <body> 
+    <div id="dot-container"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dotContainer = document.getElementById("dot-container");
+
+            function createDot(event) {
+                const dot = document.createElement("div");
+                dot.className = "dot";
+                dot.style.left = (event.clientX - 10) + "px"; 
+                dot.style.top = (event.clientY - 10) + "px";   
+                dotContainer.appendChild(dot);
+            }
+
+            document.addEventListener("click", createDot);
+        });
+    </script>
 </body>
 </html>
